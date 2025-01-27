@@ -65,8 +65,8 @@ const CurrentWeather = (props) => {
         setWeather(cityWeather);
         console.log(cityWeather);
 
-        setTimeout(() => {
-            
+        //to do : if weather loads then set everything
+
         setCurrTemp(weather.data.list[0].main.temp);
         setCurrSky(weather.data.list[0].weather[0].main);
         setCurrentWeatherImage(weather.data.list[0].weather[0].icon)
@@ -90,16 +90,10 @@ const CurrentWeather = (props) => {
         setP4Temp(weather.data.list[3].main.temp);
         setP4Time(weather.data.list[3].dt_txt.slice(11, 16));
         setP4Image(weather.data.list[3].weather[0].icon);
-    }, 1000);
 
 
     },[cityText, weather])
 
-    useEffect(() => {
-        //loadData();
-
-        return;
-    },[]);
 
     const OnForecastPress = () => {
         navigation.navigate("DailyForecast", {
@@ -204,7 +198,8 @@ const styles = StyleSheet.create({
         height: 25,
         width: 70,
         alignItems: 'center',
-        margin: '1%'
+        margin: '1%',
+        borderColor: 'white'
     },
     textInputStyle:{
         borderWidth: 1,
@@ -213,11 +208,12 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color: 'white',
         fontWeight: 'bold',
-        fontSize: 20
+        fontSize: 20,
+        borderColor: 'white'
     },
     textInputViewStyle: {
         flexDirection: 'row',
-        marginTop: '5%'
+        marginTop: '5%',
     },
     locationIconImageStyle: {
         height: 25,

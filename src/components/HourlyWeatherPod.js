@@ -5,14 +5,15 @@ import {
     Text,
     Image
 } from 'react-native';
-import { BLUE } from "../res/colors";
+import { BLUE, SKY_BLUE, DARK_BLUE } from "../res/colors";
+import LinearGradient from "react-native-linear-gradient";
 
 
 const HourlyWeatherPod = props => {
     const {text1, text2} = props;
 
     return (
-        <View style={styles.container}>
+        <LinearGradient colors={[SKY_BLUE, BLUE]} style={styles.container}>
             <Text style={styles.textStyle}>
                 {text1}
             </Text>
@@ -20,7 +21,7 @@ const HourlyWeatherPod = props => {
             <Text style={styles.textStyle}>
                 {text2}
             </Text>
-        </View>
+        </LinearGradient>
     );
 };
 
