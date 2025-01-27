@@ -19,19 +19,22 @@ import {
 } from 'react-native';
 import CurrentWeather from './src/screens/CurrentWeather';
 import DailyForecast from './src/screens/DailyForecast';
+import AppNavigation from './src/navigation/index';
 
 
 function App(): React.JSX.Element {
 
   return (
-    <SafeAreaView style={styles.sectionContainer}>
-      <CurrentWeather/>
-    </SafeAreaView>
+    <View style={styles.sectionContainer}>
+      <AppNavigation/>
+    </View>
+
   );
 }
 
 const styles = StyleSheet.create({
   sectionContainer: {
+    flex: 1,
     backgroundColor: 'black',
   },
   sectionTitle: {

@@ -32,7 +32,8 @@ const styles = StyleSheet.create({
         alignSelf: 'center'
     },
     textStyle: {
-        textAlign: 'center'
+        textAlign: 'center',
+        color: 'white'
     }
 });
 

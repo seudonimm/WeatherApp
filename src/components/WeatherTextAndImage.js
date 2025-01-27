@@ -6,11 +6,14 @@ import CityText from "./CityText";
 
 
 const WeatherTextAndImage = props => {
-    const {text1, text2, text3} = props;
+    const {text1, text2, text3, imageSource} = props;
     
     return (
         <View style={styles.container}>
-            <WeatherImage/>
+            <WeatherImage
+                style={styles.imageStyle}
+                source={props.source}
+            />
             <View>
                 <CityText text={text1}/>
                 <TemperatureText text={text2}/>
@@ -23,7 +26,11 @@ const WeatherTextAndImage = props => {
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        alignItems: 'center'
+        alignItems: 'center',
+    },
+    imageStyle:{
+        height: '55%', 
+        width: '50%'
     }
 });
 

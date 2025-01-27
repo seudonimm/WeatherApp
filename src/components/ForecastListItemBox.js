@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View }from 'react-native';
+import HorizontalImageAndText from "./HorizontalImageAndText";
 
 
 const ForecastListItemBox = props => {
@@ -9,9 +10,10 @@ const ForecastListItemBox = props => {
             <Text style={styles.textStyle}>
                 {day}
             </Text>
-            <Text style={styles.textStyle}>
-                {weatherText}
-            </Text>
+            <HorizontalImageAndText style={styles.textStyle} 
+                text={weatherText}
+                source={props.source}    
+            />
             <Text style={styles.textStyle}>
                 {temp}
             </Text>
@@ -24,11 +26,13 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         height: 50,
-        marginHorizontal: '5%',
-        marginVertical: 10,
+        marginBottom: 20,
+        marginTop: 20,
+        marginHorizontal: 25
     },
     textStyle: {
-        color: 'white'
+        color: 'white',
+        fontSize: 25
     }
 });
 

@@ -6,8 +6,8 @@ import {
 } from 'react-native';
 import ImageAndText from "./ImageAndText";
 
-const WeatherDetailsBar = () => {
-
+const WeatherDetailsBar = props => {
+    const {rainChance, humidity, windSpeed} = props;
 
     return(
         <View style={styles.barStyle}>
@@ -17,17 +17,17 @@ const WeatherDetailsBar = () => {
             
             <ImageAndText
                 source={require('/Users/jusman/Documents/Training/Projects/WeatherApp/assets/wind.png')}
-                text1={"13 km/h"}
+                text1={(windSpeed) + "m/h"}
                 text2={"Wind"}
             />
             <ImageAndText
                 source={require('/Users/jusman/Documents/Training/Projects/WeatherApp/assets/drop.png')}
-                text1={"24%"}
+                text1={(humidity) + "%"}
                 text2={"Humidity"}
             />
             <ImageAndText
                 source={require('/Users/jusman/Documents/Training/Projects/WeatherApp/assets/rain.png')}
-                text1={"82%"}
+                text1={(rainChance * 100) + "%"}
                 text2={"Chance of Rain"}
             />
         </View>
@@ -38,10 +38,12 @@ const styles = StyleSheet.create({
     barStyle: {
         width: '90%',
         flexDirection: 'row',
-        justifyContent: 'space-around',
+        justifyContent: 'space-between',
         alignContent: 'center',
         borderTopWidth: 1,
+        borderColor: 'white',
         marginHorizontal: 20,
+        marginBottom: 30
     },
     imageStyle: {
         width: '10%',

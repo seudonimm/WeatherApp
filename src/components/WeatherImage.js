@@ -1,20 +1,20 @@
 import React from "react";
 import { Image, StyleSheet, View } from 'react-native';
 
-const WeatherImage = () => {
+const WeatherImage = props => {
 
     return (
             <Image 
-                style={styles.imageStyle}
-                source={require('/Users/jusman/Documents/Training/Projects/WeatherApp/assets/sun.png')}
+                style={props.style}
+                source={props.source}
             />
     );
 }
 
 const styles = StyleSheet.create({
     imageStyle: {
-        height: '40%',
-        width: '40%'
+        height: '45%',
+        width: '50%',
     }
 });
 

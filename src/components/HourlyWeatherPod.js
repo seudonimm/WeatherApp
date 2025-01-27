@@ -5,6 +5,7 @@ import {
     Text,
     Image
 } from 'react-native';
+import { BLUE } from "../res/colors";
 
 
 const HourlyWeatherPod = props => {
@@ -26,19 +27,20 @@ const HourlyWeatherPod = props => {
 const styles = StyleSheet.create({
     container: {
         width: '20%',
-        height: '60%',
-        borderRadius: 10,
-        backgroundColor: 'blue',
+        height: '45%',
+        borderRadius: 20,
+        backgroundColor: BLUE,
         justifyContent: 'center',
         alignItems: 'center',
         margin: '1%'
     },
     imageStyle: {
-        width: 10,
-        height: 10
+        width: 80,
+        height: 80
     },
     textStyle: {
-        textAlign: 'center'
+        textAlign: 'center',
+        color: 'white'
     }
 });
 
