@@ -11,10 +11,12 @@ import { getWeather, getWeatherByCity } from "../services/WeatherServices";
 import LinearGradient from "react-native-linear-gradient";
 import { BLUE, DARK_BLUE, SKY_BLUE } from "../res/colors";
 import { useRoute } from "@react-navigation/native";
+import { WeatherContext } from "../context/WeatherContext";
 
 const DailyForecast = (props) => {
-    const route = useRoute();
-    const weather = route.params.weather;
+    const {weather, setWeather} = useContext(WeatherContext);
+    //const route = useRoute();
+    //const weather = route.params.weather;
 
     //const [weather, setWeather] = useState();
     //const weather = useContext(WeatherContext);
@@ -49,11 +51,11 @@ const DailyForecast = (props) => {
         console.log("[please");
         console.log("here")
 
-        //let cityWeather = await getWeatherByCity('atlanta');
+        let cityWeather = await getWeatherByCity('atlanta');
 
         console.log("set");
 
-        //setWeather(cityWeather)
+        setWeather(cityWeather)
 
         console.log(weather);
 

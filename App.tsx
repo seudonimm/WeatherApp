@@ -20,13 +20,16 @@ import {
 import CurrentWeather from './src/screens/CurrentWeather';
 import DailyForecast from './src/screens/DailyForecast';
 import AppNavigation from './src/navigation/index';
+import WeatherContextProvider from './src/context/WeatherContext';
 
 
 function App(): React.JSX.Element {
 
   return (
     <View style={styles.sectionContainer}>
-      <AppNavigation/>
+      <WeatherContextProvider>
+        <AppNavigation/>
+      </WeatherContextProvider>
     </View>
 
   );

@@ -1,4 +1,4 @@
-import React, { createContext, useCallback, useEffect, useState } from "react";
+import React, { createContext, useCallback, useContext, useEffect, useState } from "react";
 import {
     View,
     Text,
@@ -19,6 +19,7 @@ import DailyForecast from "./DailyForecast";
 import LinearGradient from "react-native-linear-gradient";
 import HorizontalImageAndText from "../components/HorizontalImageAndText";
 import { BLUE, DARK_BLUE, SKY_BLUE } from "../res/colors";
+import { WeatherContext } from "../context/WeatherContext";
 
 
 /*import {
@@ -27,15 +28,14 @@ import { BLUE, DARK_BLUE, SKY_BLUE } from "../res/colors";
 } from '../components/index'*/
 
 const CurrentWeather = (props) => {
+    const {weather, setWeather} = useContext(WeatherContext)
 
     const navigation = useNavigation();
 
-    const [weather, setWeather] = useState();
+    //const [weather, setWeather] = useState();
     const [currTemp, setCurrTemp] = useState();
     const [currSky, setCurrSky] = useState();
     const [currWeatherImage, setCurrentWeatherImage] = useState();
-
-    //const WeatherContext = createContext();
 
     const [wind, setWind] = useState();
     const [humidity, setHumidity] = useState();
@@ -64,32 +64,6 @@ const CurrentWeather = (props) => {
         let cityWeather = await getWeatherByCity(cityText);
         setWeather(cityWeather);
         console.log(cityWeather);
-
-        //to do : if weather loads then set everything
-
-        setCurrTemp(weather.data.list[0].main.temp);
-        setCurrSky(weather.data.list[0].weather[0].main);
-        setCurrentWeatherImage(weather.data.list[0].weather[0].icon)
-
-        setWind(weather.data.list[0].wind.speed.toString());
-        setHumidity(weather.data.list[0].main.humidity.toString());
-        setRainChance(weather.data.list[0].pop);
-
-        setP1Temp(weather.data.list[0].main.temp);
-        setP1Time(weather.data.list[0].dt_txt.slice(11, 16));
-        setP1Image(weather.data.list[0].weather[0].icon);
-
-        setP2Temp(weather.data.list[1].main.temp);
-        setP2Time(weather.data.list[1].dt_txt.slice(11, 16));
-        setP2Image(weather.data.list[1].weather[0].icon);
-
-        setP3Temp(weather.data.list[2].main.temp);
-        setP3Time(weather.data.list[2].dt_txt.slice(11, 16));
-        setP3Image(weather.data.list[2].weather[0].icon);
-
-        setP4Temp(weather.data.list[3].main.temp);
-        setP4Time(weather.data.list[3].dt_txt.slice(11, 16));
-        setP4Image(weather.data.list[3].weather[0].icon);
 
 
     },[cityText, weather])
