@@ -60,7 +60,7 @@ const CurrentWeather = (props) => {
 
     const loadData = useCallback(async() => {
         console.log("[please")
-
+        setWeather(null);
         let cityWeather = await getWeatherByCity(cityText);
         setWeather(cityWeather);
         console.log(cityWeather);
@@ -94,6 +94,33 @@ const CurrentWeather = (props) => {
 
     },[cityText, weather])
 
+    useEffect(() => {
+        if(weather){
+            setCurrTemp(weather.data.list[0].main.temp);
+            setCurrSky(weather.data.list[0].weather[0].main);
+            setCurrentWeatherImage(weather.data.list[0].weather[0].icon)
+
+            setWind(weather.data.list[0].wind.speed.toString());
+            setHumidity(weather.data.list[0].main.humidity.toString());
+            setRainChance(weather.data.list[0].pop);
+
+            setP1Temp(weather.data.list[0].main.temp);
+            setP1Time(weather.data.list[0].dt_txt.slice(11, 16));
+            setP1Image(weather.data.list[0].weather[0].icon);
+
+            setP2Temp(weather.data.list[1].main.temp);
+            setP2Time(weather.data.list[1].dt_txt.slice(11, 16));
+            setP2Image(weather.data.list[1].weather[0].icon);
+
+            setP3Temp(weather.data.list[2].main.temp);
+            setP3Time(weather.data.list[2].dt_txt.slice(11, 16));
+            setP3Image(weather.data.list[2].weather[0].icon);
+
+            setP4Temp(weather.data.list[3].main.temp);
+            setP4Time(weather.data.list[3].dt_txt.slice(11, 16));
+            setP4Image(weather.data.list[3].weather[0].icon);
+        }
+    }, [weather]);
 
     const OnForecastPress = () => {
         navigation.navigate("DailyForecast", {
