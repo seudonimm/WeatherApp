@@ -13,7 +13,7 @@ import { useRoute } from "@react-navigation/native";
 import { useWeatherContext } from "../store/context/WeatherContext";
 
 const DailyForecast = (props) => {
-    const {state:weather, loadWeather} = useWeatherContext();
+    const {state:weather} = useWeatherContext();
     //const route = useRoute();
     //const weather = route.params.weather;
 

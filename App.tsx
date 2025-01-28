@@ -21,15 +21,18 @@ import CurrentWeather from './src/screens/CurrentWeather';
 import DailyForecast from './src/screens/DailyForecast';
 import AppNavigation from './src/navigation/index';
 import WeatherContextProvider from './src/store/context/WeatherContext';
+import ErrorBoundary from './src/error/ErrorBoundary';
 
 
 function App(): React.JSX.Element {
 
   return (
     <View style={styles.sectionContainer}>
-      <WeatherContextProvider>
-        <AppNavigation/>
-      </WeatherContextProvider>
+      <ErrorBoundary>
+        <WeatherContextProvider>
+          <AppNavigation/>
+        </WeatherContextProvider>
+      </ErrorBoundary>
     </View>
 
   );

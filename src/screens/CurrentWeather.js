@@ -72,10 +72,11 @@ const CurrentWeather = (props) => {
 
     useEffect(() => {
         //console.log(weatherState);
-
         //loadData();
 
         if(weatherState.data){
+            throw new Error();
+
             console.log(weatherState);
 
             setCurrTemp(weatherState.data.list[0].main.temp);
@@ -128,11 +129,11 @@ const CurrentWeather = (props) => {
                             Update
                         </Text>
                     </Pressable>
-                    <ActivityIndicator style={{zIndex: 2}}
+                    {/*<ActivityIndicator style={{zIndex: 2}}
                     size='large'
                     animating={loading}
                     color='white'
-                    />
+                    />*/}
                     <WeatherImage
                         style={{height: '45%', width: '50%'}}
                         source={{uri:`https://openweathermap.org/img/wn/${currWeatherImage}@4x.png`}}
@@ -227,6 +228,7 @@ const styles = StyleSheet.create({
     textInputViewStyle: {
         flexDirection: 'row',
         marginTop: '5%',
+        alignItems: 'center'
     },
     locationIconImageStyle: {
         height: 25,

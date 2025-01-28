@@ -29,7 +29,8 @@ const styles = StyleSheet.create({
     imageStyle: {
         width: 30,
         height: 30,
-        alignSelf: 'center'
+        alignSelf: 'center',
+        marginTop: '10%'
     },
     textStyle: {
         textAlign: 'center',
