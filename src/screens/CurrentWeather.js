@@ -1,4 +1,4 @@
-import React, { createContext, useCallback, useContext, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
     View,
     Text,
@@ -6,21 +6,20 @@ import {
     StyleSheet,
     Image,
     Pressable,
-    TextInput
+    TextInput,
+    ActivityIndicator
 } from 'react-native'
 import  WeatherImage  from "../components/WeatherImage";
 import  CityText  from "../components/CityText";
 import TemperatureText from "../components/TemperatureText";
 import WeatherDetailsBar from "../components/WeatherDetailsBar";
 import HourlyWeatherPod from "../components/HourlyWeatherPod";
-import { getWeather, getWeatherByCity } from "../services/WeatherServices";
 import { useNavigation } from "@react-navigation/native";
 import DailyForecast from "./DailyForecast";
 import LinearGradient from "react-native-linear-gradient";
 import HorizontalImageAndText from "../components/HorizontalImageAndText";
 import { BLUE, DARK_BLUE, SKY_BLUE } from "../res/colors";
-import { WeatherContext } from "../context/WeatherContext";
-
+import { useWeatherContext } from "../store/context/WeatherContext";
 
 /*import {
     WeatherImage,
@@ -28,7 +27,7 @@ import { WeatherContext } from "../context/WeatherContext";
 } from '../components/index'*/
 
 const CurrentWeather = (props) => {
-    const {weather, setWeather} = useContext(WeatherContext)
+    const {state:weatherState, loadWeather} = useWeatherContext();
 
     const navigation = useNavigation();
 
@@ -56,50 +55,58 @@ const CurrentWeather = (props) => {
     const [p3Image, setP3Image] = useState();
     const [p4Image, setP4Image] = useState();
 
+    const [loading, setLoading] = useState(false);
+
     const [cityText, setCityText] = useState("Atlanta");
 
-    const loadData = useCallback(async() => {
+    const loadData = async() => {
         console.log("[please")
-        setWeather(null);
-        let cityWeather = await getWeatherByCity(cityText);
-        setWeather(cityWeather);
-        console.log(cityWeather);
+    //     setWeather(null);
+        await loadWeather(cityText);
+    //     setWeather(cityWeather);
+    //     setLoading(true);
+    //     console.log(cityWeather);
+        console.log(weatherState)
 
-
-    },[cityText, weather])
+    }
 
     useEffect(() => {
-        if(weather){
-            setCurrTemp(weather.data.list[0].main.temp);
-            setCurrSky(weather.data.list[0].weather[0].main);
-            setCurrentWeatherImage(weather.data.list[0].weather[0].icon)
+        //console.log(weatherState);
 
-            setWind(weather.data.list[0].wind.speed.toString());
-            setHumidity(weather.data.list[0].main.humidity.toString());
-            setRainChance(weather.data.list[0].pop);
+        //loadData();
 
-            setP1Temp(weather.data.list[0].main.temp);
-            setP1Time(weather.data.list[0].dt_txt.slice(11, 16));
-            setP1Image(weather.data.list[0].weather[0].icon);
+        if(weatherState.data){
+            console.log(weatherState);
 
-            setP2Temp(weather.data.list[1].main.temp);
-            setP2Time(weather.data.list[1].dt_txt.slice(11, 16));
-            setP2Image(weather.data.list[1].weather[0].icon);
+            setCurrTemp(weatherState.data.list[0].main.temp);
+            setCurrSky(weatherState.data.list[0].weather[0].main);
+            setCurrentWeatherImage(weatherState.data.list[0].weather[0].icon)
 
-            setP3Temp(weather.data.list[2].main.temp);
-            setP3Time(weather.data.list[2].dt_txt.slice(11, 16));
-            setP3Image(weather.data.list[2].weather[0].icon);
+            setWind(weatherState.data.list[0].wind.speed.toString());
+            setHumidity(weatherState.data.list[0].main.humidity.toString());
+            setRainChance(weatherState.data.list[0].pop);
 
-            setP4Temp(weather.data.list[3].main.temp);
-            setP4Time(weather.data.list[3].dt_txt.slice(11, 16));
-            setP4Image(weather.data.list[3].weather[0].icon);
+            setP1Temp(weatherState.data.list[0].main.temp);
+            setP1Time(weatherState.data.list[0].dt_txt.slice(11, 16));
+            setP1Image(weatherState.data.list[0].weather[0].icon);
+
+            setP2Temp(weatherState.data.list[1].main.temp);
+            setP2Time(weatherState.data.list[1].dt_txt.slice(11, 16));
+            setP2Image(weatherState.data.list[1].weather[0].icon);
+
+            setP3Temp(weatherState.data.list[2].main.temp);
+            setP3Time(weatherState.data.list[2].dt_txt.slice(11, 16));
+            setP3Image(weatherState.data.list[2].weather[0].icon);
+
+            setP4Temp(weatherState.data.list[3].main.temp);
+            setP4Time(weatherState.data.list[3].dt_txt.slice(11, 16));
+            setP4Image(weatherState.data.list[3].weather[0].icon);
+            setLoading(false);
         }
-    }, [weather]);
+    },[weatherState]);
 
     const OnForecastPress = () => {
-        navigation.navigate("DailyForecast", {
-            weather: weather
-        });
+        navigation.navigate("DailyForecast");
     };
 
     return(
@@ -121,6 +128,11 @@ const CurrentWeather = (props) => {
                             Update
                         </Text>
                     </Pressable>
+                    <ActivityIndicator style={{zIndex: 2}}
+                    size='large'
+                    animating={loading}
+                    color='white'
+                    />
                     <WeatherImage
                         style={{height: '45%', width: '50%'}}
                         source={{uri:`https://openweathermap.org/img/wn/${currWeatherImage}@4x.png`}}

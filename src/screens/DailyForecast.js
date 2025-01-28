@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from 'react-native';
 import WeatherImage from "../components/WeatherImage";
 import TemperatureText from "../components/TemperatureText";
@@ -7,14 +7,13 @@ import WeatherDetailsBar from "../components/WeatherDetailsBar";
 import { CityText } from "../components";
 import ForecastListItemBox from "../components/ForecastListItemBox";
 
-import { getWeather, getWeatherByCity } from "../services/WeatherServices";
 import LinearGradient from "react-native-linear-gradient";
 import { BLUE, DARK_BLUE, SKY_BLUE } from "../res/colors";
 import { useRoute } from "@react-navigation/native";
-import { WeatherContext } from "../context/WeatherContext";
+import { useWeatherContext } from "../store/context/WeatherContext";
 
 const DailyForecast = (props) => {
-    const {weather, setWeather} = useContext(WeatherContext);
+    const {state:weather, loadWeather} = useWeatherContext();
     //const route = useRoute();
     //const weather = route.params.weather;
 
@@ -51,11 +50,11 @@ const DailyForecast = (props) => {
         console.log("[please");
         console.log("here")
 
-        let cityWeather = await getWeatherByCity('atlanta');
+        //let cityWeather = await getWeatherByCity('atlanta');
 
         console.log("set");
 
-        setWeather(cityWeather)
+        //setWeather(cityWeather)
 
         console.log(weather);
 
@@ -87,12 +86,12 @@ const DailyForecast = (props) => {
         setDay(date.getDay());
         
 
-        console.log("set");
+        console.log("set2");
     };
 
     useEffect(() => {
         loadData();
-    }, []);
+    }, [weather]);
 
     return (
         <View style={styles.containerSupreme}>

@@ -20,7 +20,7 @@ import {
 import CurrentWeather from './src/screens/CurrentWeather';
 import DailyForecast from './src/screens/DailyForecast';
 import AppNavigation from './src/navigation/index';
-import WeatherContextProvider from './src/context/WeatherContext';
+import WeatherContextProvider from './src/store/context/WeatherContext';
 
 
 function App(): React.JSX.Element {
