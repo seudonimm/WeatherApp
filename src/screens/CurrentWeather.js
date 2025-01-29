@@ -19,7 +19,8 @@ import DailyForecast from "./DailyForecast";
 import LinearGradient from "react-native-linear-gradient";
 import HorizontalImageAndText from "../components/HorizontalImageAndText";
 import { BLUE, DARK_BLUE, SKY_BLUE } from "../res/colors";
-import { useWeatherContext } from "../store/context/WeatherContext";
+import  useWeather  from "../hooks/useWeather";
+//import { useWeatherContext } from "../store/context/WeatherContext";
 
 /*import {
     WeatherImage,
@@ -27,11 +28,16 @@ import { useWeatherContext } from "../store/context/WeatherContext";
 } from '../components/index'*/
 
 const CurrentWeather = (props) => {
-    const {state:weatherState, loadWeather} = useWeatherContext();
+    //const {state:weatherState, loadWeather} = useWeatherContext();
 
     const navigation = useNavigation();
 
+    const [cityText, setCityText] = useState("Atlanta");
+    const [cityTextFinal, setCityTextFinal] = useState('Atlanta');
+
     //const [weather, setWeather] = useState();
+    const [weatherState] = useWeather(cityTextFinal);
+
     const [currTemp, setCurrTemp] = useState();
     const [currSky, setCurrSky] = useState();
     const [currWeatherImage, setCurrentWeatherImage] = useState();
@@ -57,24 +63,23 @@ const CurrentWeather = (props) => {
 
     const [loading, setLoading] = useState(false);
 
-    const [cityText, setCityText] = useState("Atlanta");
 
     const loadData = async() => {
         console.log("[please")
     //     setWeather(null);
-        await loadWeather(cityText);
+        //await loadWeather(cityText);
     //     setWeather(cityWeather);
     //     setLoading(true);
     //     console.log(cityWeather);
         console.log(weatherState)
-
+        setCityTextFinal(cityText);
     }
 
     useEffect(() => {
         //console.log(weatherState);
         //loadData();
 
-        if(weatherState.data){
+        if(weatherState){
             //throw new Error();
 
             console.log(weatherState);

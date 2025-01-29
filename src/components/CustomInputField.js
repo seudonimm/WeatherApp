@@ -28,7 +28,7 @@ const CustomInputField = (props) => {
                     source={(isPasswordField ? require('/Users/jusman/AwesomeProject/assets/ambiguous_icon.png'): require('/Users/jusman/AwesomeProject/assets/blank.png'))}
                 /> */}
             </View>
-            <Text>
+            <Text style={styles.textStyle}>
                 {inputErrorMessage}
             </Text>
         </View>
@@ -79,6 +79,10 @@ const styles = StyleSheet.create({
         marginRight: '5%',
         justifyContent: 'flex-end',
         
+    },
+    textStyle: {
+        color: 'red',
+        marginLeft: '5%'
     }
 });
 

@@ -10,15 +10,18 @@ import ForecastListItemBox from "../components/ForecastListItemBox";
 import LinearGradient from "react-native-linear-gradient";
 import { BLUE, DARK_BLUE, SKY_BLUE } from "../res/colors";
 import { useRoute } from "@react-navigation/native";
-import { useWeatherContext } from "../store/context/WeatherContext";
+import useWeather from "../hooks/useWeather";
+//import { useWeatherContext } from "../store/context/WeatherContext";
 
 const DailyForecast = (props) => {
-    const {state:weather} = useWeatherContext();
+    //const {state:weather} = useWeatherContext();
     //const route = useRoute();
     //const weather = route.params.weather;
 
-    //const [weather, setWeather] = useState();
+    const [weather, setWeather] = useState();
     //const weather = useContext(WeatherContext);
+
+    const [weatherState] = useWeather('Chicago');
 
     const [wind, setWind] = useState();
     const [humidity, setHumidity] = useState();
@@ -47,6 +50,7 @@ const DailyForecast = (props) => {
     const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
     const loadData = async() => {
+        setWeather(weatherState)
         console.log("[please");
         console.log("here")
 
@@ -56,7 +60,7 @@ const DailyForecast = (props) => {
 
         //setWeather(cityWeather)
 
-        console.log(weather);
+        console.log(weatherState);
 
         setWind(weather.data.list[9].wind.speed.toString());
         setHumidity(weather.data.list[9].main.humidity.toString());
@@ -91,7 +95,7 @@ const DailyForecast = (props) => {
 
     useEffect(() => {
         loadData();
-    }, [weather]);
+    }, [weatherState, weather]);
 
     return (
         <View style={styles.containerSupreme}>

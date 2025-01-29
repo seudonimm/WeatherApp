@@ -5,7 +5,8 @@ import {
     ImageBackground,
     View,
     Text,
-    StyleSheet
+    StyleSheet,
+    Platform
 } from 'react-native';
 
 const Header = props => {

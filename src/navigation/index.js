@@ -9,7 +9,7 @@ const Stack = createNativeStackNavigator();
 function RootStack(){
     return (
         
-        <Stack.Navigator initialRouteName="Login">
+        <Stack.Navigator initialRouteName="CurrentWeather">
             <Stack.Screen name="CurrentWeather" component={CurrentWeather}
                 options={{
                     //headerShown:false
