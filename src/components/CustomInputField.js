@@ -3,28 +3,34 @@ import {
     Image,
     StyleSheet,
     TextInput,
-    View
+    View,
+    Text
 } from "react-native"
 
 const CustomInputField = (props) => {
-    const {text, image, isPasswordField} = props;
+    const {text, inputErrorMessage, image, isPasswordField} = props;
 
     return(
-        <View style={styles.container}>
-            {/* <Image style={styles.imageStyle} source={props.source}/> */}
-            <TextInput 
-                style={styles.inputStyle}
-                placeholder={text}
-                placeholderTextColor={"white"}
-                // inlineImageLeft={image}
-                onChangeText={props.onChangeText}
-                cursorColor={'white'}
-                value={props.value}
-            />
-            {/* <Image 
-                style={styles.endImageStyle}
-                source={(isPasswordField ? require('/Users/jusman/AwesomeProject/assets/ambiguous_icon.png'): require('/Users/jusman/AwesomeProject/assets/blank.png'))}
-            /> */}
+        <View>
+            <View style={styles.container}>
+                {/* <Image style={styles.imageStyle} source={props.source}/> */}
+                <TextInput 
+                    style={styles.inputStyle}
+                    placeholder={text}
+                    placeholderTextColor={"white"}
+                    // inlineImageLeft={image}
+                    onChangeText={props.onChangeText}
+                    cursorColor={'white'}
+                    //value={props.value}
+                />
+                {/* <Image 
+                    style={styles.endImageStyle}
+                    source={(isPasswordField ? require('/Users/jusman/AwesomeProject/assets/ambiguous_icon.png'): require('/Users/jusman/AwesomeProject/assets/blank.png'))}
+                /> */}
+            </View>
+            <Text>
+                {inputErrorMessage}
+            </Text>
         </View>
     );
 };
@@ -32,7 +38,7 @@ const CustomInputField = (props) => {
 const styles = StyleSheet.create({
     container:{
         flexDirection: 'row',
-        height: '7%',
+        height: '25%',
         width: '90%',
         alignSelf: 'center',
         backgroundColor: '#1e1d24',
@@ -45,7 +51,7 @@ const styles = StyleSheet.create({
         color: 'white'
     },
     inputStyle: {
-        flex:9,
+        flex: 1,
         /*height: '7%',
         width: '90%',
         alignSelf: 'center',

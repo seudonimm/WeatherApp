@@ -12,7 +12,7 @@ function RootStack(){
         <Stack.Navigator initialRouteName="Login">
             <Stack.Screen name="CurrentWeather" component={CurrentWeather}
                 options={{
-                    headerShown:false
+                    //headerShown:false
                 }}
             />
             <Stack.Screen name="DailyForecast" component={DailyForecast}/>
