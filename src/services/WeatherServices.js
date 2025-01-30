@@ -25,4 +25,9 @@ export const getWeatherByCity = async(city) => {
     }
 };
 
-//export {getWeather, getWeatherByCity}
+export const getRequestByFetch = async city => {
+    fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${WEATHER_API_KEY}&units=imperial`)
+        .then(response => response.json())
+        .then(data => console.log("WeatherDataUsingFetch", data))
+        .catch(e => console.log("Error", e));
+}

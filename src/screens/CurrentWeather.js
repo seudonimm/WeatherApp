@@ -71,18 +71,18 @@ const CurrentWeather = (props) => {
     //     setWeather(cityWeather);
     //     setLoading(true);
     //     console.log(cityWeather);
-        console.log(weatherState)
+        //console.log(weatherState)
         setCityTextFinal(cityText);
     }
 
     useEffect(() => {
-        //console.log(weatherState);
+        console.log(weatherState);
         //loadData();
 
         if(weatherState){
             //throw new Error();
 
-            console.log(weatherState);
+            console.log("here");
 
             setCurrTemp(weatherState.data.list[0].main.temp);
             setCurrSky(weatherState.data.list[0].weather[0].main);
